@@ -9,31 +9,18 @@ const usersGet = async ( req = request, res = response ) =>
 
     const { from = 0, limit = 5, active = 'all' } = req.query;
 
-    let query;
+    let query = { '' : '' };
 
-    try
-    
-    {
-
-        query = { status : Boolean( active ) }
-
-    }
-
-    catch( err )
-    
-    {
-
-        query = { '' : '' }
-
-    }
-    
+    if ( active === "false" ) query = { status : false };
+    else if ( active === "true" ) query = { status : true };
+ 
     const [ users, total ] = await Promise.all( 
         
         [
 
             User.find( query )
             
-                .skip( from )
+                .skip( Number( from ) )
                 .limit( Number( limit ) ),
 
             User.countDocuments( query )
