@@ -7,7 +7,7 @@ const usersGet = async ( req = request, res = response ) =>
 
 {
 
-    const { from = 0, limit = 5, active = 'all' } = req.query;
+    const { begin = 0, limit = 5, active } = req.query;
 
     let query = { '' : '' };
 
@@ -20,7 +20,7 @@ const usersGet = async ( req = request, res = response ) =>
 
             User.find( query )
             
-                .skip( Number( from ) )
+                .skip( Number( begin ) )
                 .limit( Number( limit ) ),
 
             User.countDocuments( query )
