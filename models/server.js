@@ -3,6 +3,8 @@ require( 'dotenv' ).config();
 const cors = require( 'cors' );
 const express = require( 'express' );
 
+const { dbConnection } = require( '../database/config' );
+
 class Server
 
 {
@@ -18,6 +20,10 @@ class Server
 
         this.usersRoute = '/api/users';
 
+        // DB Connection
+
+        this.connectToDB();
+
         // Middlewares
 
         this.middlewares();
@@ -25,6 +31,14 @@ class Server
         // Routes
 
         this.routes();
+
+    }
+
+    async connectToDB() 
+    
+    {
+
+        await dbConnection();
 
     }
 
