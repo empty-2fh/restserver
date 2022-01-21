@@ -1,9 +1,18 @@
 const { Router } = require( 'express' );
 const { check } =  require( 'express-validator' );
 
-const { validateData } = require( '../middlewares/validate-data' );
-
 const 
+
+{
+
+    validateJWT,
+    validateData,
+    hasRole,
+    hasAdminRole
+
+} = require( '../middlewares/' );
+
+const
 
 { 
     
@@ -60,12 +69,16 @@ router.delete( '/:id',
 
     [
 
+        validateJWT,
+        hasRole( 'ADMIN_ROLE', 'USER_ROLE', 'VENTAS_ROLE' ),
+        hasAdminRole,
         check( 'id', 'El id no es un id valido de mongoose' ).isMongoId(),
         check( 'id' ).custom( userIdExists ),
 
         validateData
         
     ], usersDelete );
+
 router.patch( '/', usersPatch );
 
 module.exports = router;

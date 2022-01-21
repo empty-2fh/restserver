@@ -19,6 +19,7 @@ class Server
         // EndPoints
 
         this.usersRoute = '/api/users';
+        this.authRoute = '/auth';
 
         // DB Connection
 
@@ -64,6 +65,7 @@ class Server
     
     {
 
+        this.app.use( this.authRoute, require( '../routes/auth' ) );
         this.app.use( this.usersRoute, require( '../routes/users' ) );
 
     }
