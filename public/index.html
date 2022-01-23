@@ -1,14 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <title> Google Sign </title>
+
+
+    <meta name="google-signin-client_id" content="283160396255-kklsf91kv8dp71t1a1nhvotu7g5ake40.apps.googleusercontent.com">
+
 </head>
 <body>
     
-    <h1> 404 Error | Page not found </h1>
+    <h1> Google Sign </h1>
+
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+    <script>
+
+        function onSignIn(googleUser) 
+        
+        {
+        
+            const id_token = googleUser.getAuthResponse().id_token;
+
+            const url = ( window.location.hostname.includes( 'localhost' ) ) 
+            
+                        ? 'http://localhost:7070/auth/google'
+                        : 'https://empty-restserver.herokuapp.com/auth/google'
+
+
+            const data = { id_token };
+
+            fetch( url, 
+            
+                {
+
+                    method : 'POST',
+                    headers : { 'Content-Type' : 'application/json' },
+                    body : JSON.stringify( data )
+
+                } )
+
+                .then( ( resp ) => resp.json() )
+                .then( ( data ) => console.log( 'Nuestro server', data ) )
+
+                .catch( console.log );
+
+        }
+
+    </script>
+
+    <a href="#" onclick="signOut();">Sign out</a>
+
+    <script>
+
+    function signOut() 
+
+    {
+    
+        var auth2 = gapi.auth2.getAuthInstance();
+    
+        auth2.signOut().then( function () 
+        
+        {
+        
+            console.log('User signed out.');
+        
+        });
+    
+    }
+
+    </script>
 
 </body>
 </html>

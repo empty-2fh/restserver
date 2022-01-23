@@ -32,7 +32,7 @@ const UserSchema = Schema(
 
         },
 
-        img : 
+        picture : 
         
         {
 
@@ -46,6 +46,7 @@ const UserSchema = Schema(
 
             type : String,
             required : [ true, 'El rol de usuario es obligatorio' ],
+            default : 'USER_ROLE',
             enum : [ 'ADMIN_ROLE', 'USER_ROLE' ]
 
         },
