@@ -18,8 +18,17 @@ class Server
 
         // EndPoints
 
-        this.usersRoute = '/api/users';
-        this.authRoute = '/auth';
+        this.endpoints = 
+        
+        {
+
+            auth       : '/auth',
+            categories : '/api/categories',
+            search     : '/api/search',
+            products   : '/api/products', 
+            users      : '/api/users'
+
+        }
 
         // DB Connection
 
@@ -65,8 +74,11 @@ class Server
     
     {
 
-        this.app.use( this.authRoute, require( '../routes/auth' ) );
-        this.app.use( this.usersRoute, require( '../routes/users' ) );
+        this.app.use( this.endpoints.auth, require( '../routes/auth' ) );
+        this.app.use( this.endpoints.categories, require( '../routes/categories' ) );
+        this.app.use( this.endpoints.products, require( '../routes/products' ) );
+        this.app.use( this.endpoints.search, require( '../routes/search' ) );
+        this.app.use( this.endpoints.users, require( '../routes/users' ) );
 
     }
 

@@ -30,7 +30,7 @@ const hasRole = ( ...roles ) =>
 
 {
 
-    return ( req, res = response, next ) =>
+    return ( req = request, res = response, next ) =>
     
     {
 

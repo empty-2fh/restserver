@@ -15,7 +15,7 @@ const validateJWT = async ( req = request, res = response, next ) =>
     
     {
 
-        return res.status( 401 ).json( { msg :'Token de autentiacion no valido' } );
+        return res.status( 401 ).json( { msg : 'Se requiere de un token de autenticacion' } );
 
     }
 
