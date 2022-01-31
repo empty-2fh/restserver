@@ -1,6 +1,4 @@
 const { request, response } = require( 'express' );
-const { resetWatchers } = require('nodemon/lib/monitor/watch');
-
 const { Product } = require( '../models' );
 
 const createProducts = async ( req = request, res = response ) =>
